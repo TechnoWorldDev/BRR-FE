@@ -1,0 +1,32 @@
+{
+  "name": "bbr-fe",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.0",
+    "typescript": "5.8.2"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/web",
+      "apps/admin",
+      "packages/*"
+    ]
+  },
+  "dependencies": {
+    "@radix-ui/react-popover": "^1.1.6",
+    "date-fns": "^4.1.0",
+    "react-day-picker": "^9.7.0"
+  }
+}
