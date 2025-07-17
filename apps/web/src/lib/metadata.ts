@@ -72,7 +72,7 @@ export interface BlogMetadata {
   }
 }
 
-export interface BlogPostMetadata {
+export interface BlogPostMetadata { 
   type: 'blogPost'
   data: {
     title: { rendered: string }
