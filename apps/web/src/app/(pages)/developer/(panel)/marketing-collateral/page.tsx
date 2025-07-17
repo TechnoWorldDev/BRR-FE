@@ -32,7 +32,7 @@ export default function DeveloperMarketingCollateral() {
     useEffect(() => {
         const fetchResidences = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/residences/me?limit=10&page=1`, {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/directory/me?limit=10&page=1`, {
                     credentials: "include",
                 });
                 const data = await response.json();

@@ -38,7 +38,7 @@ export default function AboutUsPage() {
               most exceptional branded residences.
             </p>
             <Link
-              href="/best-residences"
+              href="/rankings"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-fit lg:m-auto"
             >
               Explore Our Rankings
@@ -492,7 +492,7 @@ export default function AboutUsPage() {
             Let our platform guide your next step in branded living.
           </p>
           <div className="flex gap-[8px] place-self-start lg:place-self-center">
-            <Link href="/best-residences" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-fit">
+            <Link href="/rankings" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-fit">
               View Rankings
             </Link>
             <Link href="/contact" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-transparent text-primary-foreground shadow-xs hover:bg-white/5 h-9 px-4 py-2 has-[>svg]:px-3 w-fit border border-white/70" >

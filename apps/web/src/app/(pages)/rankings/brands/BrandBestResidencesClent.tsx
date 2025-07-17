@@ -4,6 +4,9 @@ import SectionLayout from "@/components/web/SectionLayout";
 import RankingCard from "@/components/web/Ranking/RankingCard";
 import { Pagination } from "@/components/common/Pagination";
 import React from "react";
+import type { Metadata } from 'next'
+
+
 
 // Skeleton component
 const Skeleton = ({ className }: { className?: string }) => (
@@ -34,7 +37,7 @@ interface CategoriesResponse {
     pagination: PaginationData;
 }
 
-export default function CityBestResidencesClient() {
+export default function BrandBestResidencesClient() {
     const [data, setData] = useState<RankingCategory[]>([]);
     const [pagination, setPagination] = useState<PaginationData>({
         total: 0,
@@ -47,9 +50,9 @@ export default function CityBestResidencesClient() {
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const apiVersion = process.env.NEXT_PUBLIC_API_VERSION;
-    const categoryTypeId = '9f24a349-c942-43b4-8488-88d57aee65be'; // Cities ID
+    const categoryTypeId = '1d917665-1159-4c08-8b7f-715bbfac5b3e'; // Brands ID
 
-    // Fetch cities data
+    // Fetch brands ranking categories data
     const fetchData = useCallback(async (page: number) => {
         if (!baseUrl || !apiVersion) return;
 
@@ -61,7 +64,7 @@ export default function CityBestResidencesClient() {
             const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error(`Failed to fetch cities: ${response.status}`);
+                throw new Error(`Failed to fetch brand categories: ${response.status}`);
             }
 
             const result: CategoriesResponse = await response.json();
@@ -69,7 +72,7 @@ export default function CityBestResidencesClient() {
             setData(result.data || []);
             setPagination(result.pagination);
         } catch (err) {
-            console.error('Error fetching cities:', err);
+            console.error('Error fetching brand categories:', err);
             setError(err instanceof Error ? err.message : 'Unknown error occurred');
         } finally {
             setLoading(false);
@@ -116,7 +119,7 @@ export default function CityBestResidencesClient() {
                 {/* Content Skeleton */}
                 <SectionLayout>
                     <div className="w-full xl:max-w-[1600px] mx-auto">
-                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                             {Array.from({ length: 16 }, (_, i) => (
                                 <CardSkeleton key={i} />
                             ))}
@@ -134,8 +137,8 @@ export default function CityBestResidencesClient() {
                 <div className="flex flex-col items-center rounded-b-xl bg-secondary max-w-[calc(100svw-1.5rem)] 2xl:max-w-[calc(100svw-4rem)] mx-auto px-4 lg:px-12 py-12 gap-4 xl:gap-12 mb-12">
                     <div className="w-full xl:max-w-[1600px] mx-auto">
                         <div className="page-header flex flex-col gap-6 w-full lg:w-1/2 mx-auto ms-0">
-                            <p className="text-md uppercase text-left text-primary">URBAN LUXURY DESTINATIONS</p>
-                            <h1 className="text-4xl font-bold text-left">Best Branded Residences by Cities</h1>
+                            <p className="text-md uppercase text-left text-primary">LUXURY BRAND COLLECTIONS</p>
+                            <h1 className="text-4xl font-bold text-left">Best Branded Residences by Brands</h1>
                         </div>
                     </div>
                 </div>
@@ -154,12 +157,12 @@ export default function CityBestResidencesClient() {
             <div className="flex flex-col items-center rounded-b-xl bg-secondary max-w-[calc(100svw-1.5rem)] 2xl:max-w-[calc(100svw-4rem)] mx-auto px-4 lg:px-12 py-12 gap-4 xl:gap-12 mb-12">
                 <div className="w-full xl:max-w-[1600px] mx-auto">
                     <div className="page-header flex flex-col gap-6 w-full lg:w-1/2 mx-auto ms-0">
-                        <p className="text-md uppercase text-left text-primary">URBAN LUXURY DESTINATIONS</p>
+                        <p className="text-md uppercase text-left text-primary">LUXURY BRAND COLLECTIONS</p>
                         <h1 className="text-4xl font-bold text-left">
-                            Best Branded Residences by Cities
+                            Best Branded Residences by Brands
                         </h1>
                         <p className="text-lg text-white/80">
-                            Explore premium branded residences in major cities globally and find your perfect urban luxury living destination.
+                            Browse residences by prestigious luxury brands and explore exclusive collections from world-renowned developers and designers.
                         </p>
                     </div>
                 </div>
@@ -170,7 +173,7 @@ export default function CityBestResidencesClient() {
                 <div className="w-full xl:max-w-[1600px] mx-auto">
                     {data.length === 0 && !loading ? (
                         <div className="text-center text-white text-xl py-12">
-                            No cities found.
+                            No brand categories found.
                         </div>
                     ) : (
                         <>
@@ -181,7 +184,8 @@ export default function CityBestResidencesClient() {
                                         category={category}
                                         baseUrl={baseUrl!}
                                         apiVersion={apiVersion!}
-                                        url={`/best-residences/cities/${category.slug}`}
+                                        url={`/rankings/${category.slug}`}
+
                                     />
                                 ))}
                             </div>

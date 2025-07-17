@@ -41,7 +41,7 @@ export default function BestResidencesSection() {
                     <span className="text-md lg:text-lg text-left text-primary w-full">BEST WORLDWIDE RESIDENCES</span>
                     <h2 className="text-4xl font-bold w-[100%] lg:w-[60%] text-left">Choose from the Best Branded Residences Wordwide</h2>
                 </div>
-                <Link href="/best-residences" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-full lg:w-fit mb-8">
+                <Link href="/rankings" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-full lg:w-fit mb-8">
                     View Ratings
                 </Link>
             </div>

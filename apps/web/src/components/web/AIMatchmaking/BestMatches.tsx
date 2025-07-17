@@ -64,7 +64,7 @@ export function BestMatches({ userSelections, matches = [] }: BestMatchesProps) 
   // Handle view more - navigate to property detail
   const handleViewMore = (propertyId: string) => {
     // Open in new tab
-    window.open(`/residences/${propertyId}`, '_blank')
+    window.open(`/directory/${propertyId}`, '_blank')
   }
 
   // Handle request information

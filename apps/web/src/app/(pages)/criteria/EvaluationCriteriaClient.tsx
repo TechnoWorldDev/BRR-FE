@@ -152,7 +152,7 @@ export default function EvaluationCriteriaClient() {
               </p>
               <div className="flex gap-4">
                 <GetMatchedButton />
-                <Link href="/residences">
+                <Link href="/directory">
                   <Button variant="outline" className="place-self-start lg:place-self-center">
                     Explore residences
                   </Button>
@@ -171,7 +171,7 @@ export default function EvaluationCriteriaClient() {
         <div className="flex flex-col gap-[30px] lg:flex-row lg:gap-[200px] xl:max-w-[1600px] mx-auto">
           <div className="flex place-self-start gap-[12px] lg:place-self-end">
             <GetMatchedButton />
-            <Link href="/residences">
+            <Link href="/directory">
               <Button variant="outline" className="lace-self-start lg:place-self-center text-blackBlueVariant1 hover:text-blackBlueVariant1/50 !border-blackBlueVariant1">
                 Explore residences
               </Button>
@@ -347,7 +347,7 @@ export default function EvaluationCriteriaClient() {
                 </p>
               </div>
               <Button variant="secondary" className="w-full">
-                <Link href="/best-residences">See all rankings</Link>
+                <Link href="/rankings">See all rankings</Link>
               </Button>
             </div>
           </div>
@@ -377,7 +377,7 @@ export default function EvaluationCriteriaClient() {
           <div className="flex gap-4">
             <GetMatchedButton />
 
-            <Link href="/residences">
+            <Link href="/directory">
               <Button variant="outline" className="lace-self-start lg:place-self-center text-blackBlueVariant1 hover:text-blackBlueVariant1/50 !border-blackBlueVariant1">
                 Explore residences
               </Button>

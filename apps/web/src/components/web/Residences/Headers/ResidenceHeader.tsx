@@ -44,7 +44,7 @@ export function ResidenceHeader({ residence }: ResidenceHeaderProps) {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/residences/${residence.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/directory/${residence.id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -95,11 +95,11 @@ export function ResidenceHeader({ residence }: ResidenceHeaderProps) {
             <Trash2 className="h-4 w-4" />
             Delete
           </Button>
-          <Button variant="outline" className="px-3 py-2" onClick={() => router.push(`/developer/residences/${residence.slug}/edit`)}>
+          <Button variant="outline" className="px-3 py-2" onClick={() => router.push(`/developer/directory/${residence.slug}/edit`)}>
             <Pencil className="h-4 w-4" />
             Edit Residence
           </Button>
-          <Button variant="outline" className="px-3 py-2" onClick={() => router.push(`/residences/${residence.slug}`)} rel="noopener noreferrer">
+          <Button variant="outline" className="px-3 py-2" onClick={() => router.push(`/directory/${residence.slug}`)} rel="noopener noreferrer">
             <Eye className="h-4 w-4" />
             View Residence
           </Button>

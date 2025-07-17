@@ -158,7 +158,7 @@ export function generatePageMetadata(config: MetadataConfig): Metadata {
 function generateResidenceMetadata(residence: ResidenceMetadata['data']): Metadata {
   const title = residence.name
   const description = residence.subtitle || residence.description?.slice(0, 160) || `Luxury residence in ${residence.city?.name || 'premium location'}`
-  const url = `/residences/${residence.slug}`
+  const url = `/directory/${residence.slug}`
   const image = residence.featuredImage?.id ? getMediaUrl(residence.featuredImage.id) : baseConfig.defaultImage
   
   const keywords = [
@@ -206,7 +206,7 @@ function generateResidenceMetadata(residence: ResidenceMetadata['data']): Metada
 function generateCategoryMetadata(category: CategoryMetadata['data']): Metadata {
   const title = `Best Branded Residences in ${category.title}`
   const description = category.description || `Discover the top ${category.residenceLimitation || 10} luxury branded residences in ${category.title}. Exclusive rankings and detailed insights.`
-  const url = `/best-residences/${category.slug}`
+  const url = `/rankings/${category.slug}`
   const image = category.featuredImage?.id ? getMediaUrl(category.featuredImage.id) : baseConfig.defaultImage
   
   const keywords = [

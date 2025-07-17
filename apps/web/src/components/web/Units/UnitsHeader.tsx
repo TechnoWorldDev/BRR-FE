@@ -11,7 +11,7 @@ interface UnitsHeaderProps {
 export function UnitsHeader({ totalUnits = 0, residenceId, residenceSlug }: UnitsHeaderProps) {
   const handleAddUnit = () => {
     if (residenceId) {
-      window.location.href = `/developer/residences/${residenceSlug}/units/create`;
+      window.location.href = `/developer/directory/${residenceSlug}/units/create`;
     } else {
       // Fallback ako nema residenceId
       console.warn("No residenceId provided for unit creation");

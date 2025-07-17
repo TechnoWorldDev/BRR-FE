@@ -124,7 +124,7 @@ export function UnitsCardList({ units, residenceId }: UnitsCardListProps) {
                 variant="outline"
                 size="sm"
                 className="flex-1"
-                onClick={() => window.location.href = `/residences/${residenceId}/units/${unit.id}`}
+                onClick={() => window.location.href = `/directory/${residenceId}/units/${unit.id}`}
               >
                 <Eye className="h-4 w-4 mr-2" />
                 View
@@ -133,7 +133,7 @@ export function UnitsCardList({ units, residenceId }: UnitsCardListProps) {
                 variant="outline"
                 size="sm"
                 className="flex-1"
-                onClick={() => window.location.href = `/residences/${residenceId}/units/${unit.id}/edit`}
+                onClick={() => window.location.href = `/directory/${residenceId}/units/${unit.id}/edit`}
               >
                 <Edit className="h-4 w-4 mr-2" />
                 Edit

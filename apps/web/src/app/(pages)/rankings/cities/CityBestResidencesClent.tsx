@@ -34,7 +34,7 @@ interface CategoriesResponse {
     pagination: PaginationData;
 }
 
-export default function CountriesBestResidencesClient() {
+export default function CityBestResidencesClient() {
     const [data, setData] = useState<RankingCategory[]>([]);
     const [pagination, setPagination] = useState<PaginationData>({
         total: 0,
@@ -47,9 +47,9 @@ export default function CountriesBestResidencesClient() {
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const apiVersion = process.env.NEXT_PUBLIC_API_VERSION;
-    const categoryTypeId = 'ef03dc8f-ccde-464c-9e36-1ff9d3c79645'; // Countries ID
+    const categoryTypeId = '9f24a349-c942-43b4-8488-88d57aee65be'; // Cities ID
 
-    // Fetch countries data
+    // Fetch cities data
     const fetchData = useCallback(async (page: number) => {
         if (!baseUrl || !apiVersion) return;
 
@@ -61,7 +61,7 @@ export default function CountriesBestResidencesClient() {
             const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error(`Failed to fetch countries: ${response.status}`);
+                throw new Error(`Failed to fetch cities: ${response.status}`);
             }
 
             const result: CategoriesResponse = await response.json();
@@ -69,7 +69,7 @@ export default function CountriesBestResidencesClient() {
             setData(result.data || []);
             setPagination(result.pagination);
         } catch (err) {
-            console.error('Error fetching countries:', err);
+            console.error('Error fetching cities:', err);
             setError(err instanceof Error ? err.message : 'Unknown error occurred');
         } finally {
             setLoading(false);
@@ -116,8 +116,8 @@ export default function CountriesBestResidencesClient() {
                 {/* Content Skeleton */}
                 <SectionLayout>
                     <div className="w-full xl:max-w-[1600px] mx-auto">
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
-                            {Array.from({ length: 12 }, (_, i) => (
+                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
+                            {Array.from({ length: 16 }, (_, i) => (
                                 <CardSkeleton key={i} />
                             ))}
                         </div>
@@ -134,8 +134,8 @@ export default function CountriesBestResidencesClient() {
                 <div className="flex flex-col items-center rounded-b-xl bg-secondary max-w-[calc(100svw-1.5rem)] 2xl:max-w-[calc(100svw-4rem)] mx-auto px-4 lg:px-12 py-12 gap-4 xl:gap-12 mb-12">
                     <div className="w-full xl:max-w-[1600px] mx-auto">
                         <div className="page-header flex flex-col gap-6 w-full lg:w-1/2 mx-auto ms-0">
-                            <p className="text-md uppercase text-left text-primary">BEST WORLDWIDE RESIDENCES</p>
-                            <h1 className="text-4xl font-bold text-left">Best Branded Residences by Countries</h1>
+                            <p className="text-md uppercase text-left text-primary">URBAN LUXURY DESTINATIONS</p>
+                            <h1 className="text-4xl font-bold text-left">Best Branded Residences by Cities</h1>
                         </div>
                     </div>
                 </div>
@@ -154,12 +154,12 @@ export default function CountriesBestResidencesClient() {
             <div className="flex flex-col items-center rounded-b-xl bg-secondary max-w-[calc(100svw-1.5rem)] 2xl:max-w-[calc(100svw-4rem)] mx-auto px-4 lg:px-12 py-12 gap-4 xl:gap-12 mb-12">
                 <div className="w-full xl:max-w-[1600px] mx-auto">
                     <div className="page-header flex flex-col gap-6 w-full lg:w-1/2 mx-auto ms-0">
-                        <p className="text-md uppercase text-left text-primary">BEST WORLDWIDE RESIDENCES</p>
+                        <p className="text-md uppercase text-left text-primary">URBAN LUXURY DESTINATIONS</p>
                         <h1 className="text-4xl font-bold text-left">
-                            Best Branded Residences by Countries
+                            Best Branded Residences by Cities
                         </h1>
                         <p className="text-lg text-white/80">
-                            Find top branded residences in countries around the world and discover luxury living opportunities in your preferred destination.
+                            Explore premium branded residences in major cities globally and find your perfect urban luxury living destination.
                         </p>
                     </div>
                 </div>
@@ -170,7 +170,7 @@ export default function CountriesBestResidencesClient() {
                 <div className="w-full xl:max-w-[1600px] mx-auto">
                     {data.length === 0 && !loading ? (
                         <div className="text-center text-white text-xl py-12">
-                            No countries found.
+                            No cities found.
                         </div>
                     ) : (
                         <>
@@ -181,7 +181,7 @@ export default function CountriesBestResidencesClient() {
                                         category={category}
                                         baseUrl={baseUrl!}
                                         apiVersion={apiVersion!}
-                                        url={`/best-residences/countries/${category.slug}`}
+                                        url={`/rankings/cities/${category.slug}`}
                                     />
                                 ))}
                             </div>

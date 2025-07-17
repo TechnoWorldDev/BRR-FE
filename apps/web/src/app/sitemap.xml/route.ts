@@ -115,13 +115,13 @@ export async function GET() {
   const dynamicUrls = [
     // Rezidencije (visok prioritet, dnevno ažuriranje)
     ...residences.map((r: any) => ({
-      url: `/residences/${r.slug}`,
+      url: `/directory/${r.slug}`,
       priority: '0.8',
       changefreq: 'daily'
     })),
     // Kategorije (visok prioritet, nedeljno ažuriranje)
     ...categories.map((c: any) => ({
-      url: `/best-residences/${c.slug}`,
+      url: `/rankings/${c.slug}`,
       priority: '0.8',
       changefreq: 'weekly'
     })),

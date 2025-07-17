@@ -59,7 +59,7 @@ export function UnitsActions({ row, onDelete, currentPage, residenceId, residenc
       label: "View details",
       icon: <Eye className="h-4 w-4" />,
       onClick: (unit: Unit) => {
-        window.location.href = `/residences/${residenceId}/units/${unit.id}`;
+        window.location.href = `/directory/${residenceId}/units/${unit.id}`;
       }
     },
     {
@@ -78,7 +78,7 @@ export function UnitsActions({ row, onDelete, currentPage, residenceId, residenc
         row={row} 
         actions={actions}
         editAction={{
-          href: `/developer/residences/${residenceSlug}/units/${row.original.id}/edit`,
+          href: `/developer/directory/${residenceSlug}/units/${row.original.id}/edit`,
         }}
       />
 
@@ -103,7 +103,7 @@ export function UnitsActions({ row, onDelete, currentPage, residenceId, residenc
         </AlertDialogContent>
       </AlertDialog>
 {/* 
-        <Link href={`/developer/residences/${residenceSlug}/units/${row.original.id}/edit`}>
+        <Link href={`/developer/directory/${residenceSlug}/units/${row.original.id}/edit`}>
           <Button variant="outline" size="sm">Edit</Button>
         </Link> */}
     </>

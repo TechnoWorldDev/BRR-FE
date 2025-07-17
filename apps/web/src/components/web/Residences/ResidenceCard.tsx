@@ -129,7 +129,7 @@ export function ResidenceCard({ residence, score, isFavorite = false, onFavorite
     : [];
   
   return (
-    <Link href={`/residences/${residence.slug}`} className="border p-4 bg-secondary/30 rounded-lg group flex justify-between flex-col not-prose gap-4 hover:bg-secondary/50 transition-all h-full hover:-translate-y-2">
+    <Link href={`/directory/${residence.slug}`} className="border p-4 bg-secondary/30 rounded-lg group flex justify-between flex-col not-prose gap-4 hover:bg-secondary/50 transition-all h-full hover:-translate-y-2">
         <div className="h-72 w-full overflow-hidden relative rounded-md border flex items-center justify-center">
           {/* Residences badges  */}
           {score !== undefined && (

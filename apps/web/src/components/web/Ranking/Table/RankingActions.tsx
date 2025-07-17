@@ -28,7 +28,7 @@ export function RankingActions({ row }: RankingActionsProps) {
   return (
     <div className="flex items-center gap-2">
       <Link 
-        href={`/residences/${ranking.residenceSlug}`} 
+        href={`/directory/${ranking.residenceSlug}`} 
         target="_blank"
       >
         <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -36,7 +36,7 @@ export function RankingActions({ row }: RankingActionsProps) {
         </Button>
       </Link>
       <Link 
-        href={`/best-residences/${ranking.rankingCategorySlug}`} 
+        href={`/rankings/${ranking.rankingCategorySlug}`} 
         target="_blank"
       >
         <Button variant="ghost" size="icon" className="h-8 w-8">

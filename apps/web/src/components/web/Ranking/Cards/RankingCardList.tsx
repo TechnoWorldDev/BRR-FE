@@ -102,7 +102,7 @@ export function RankingCardList({ rankings }: RankingCardListProps) {
             </div>
             <div className="flex gap-2">
               <Link 
-                href={`/residences/${ranking.residenceSlug}`} 
+                href={`/directory/${ranking.residenceSlug}`} 
                 target="_blank"
               >
                 <Button variant="ghost" size="sm">
@@ -111,7 +111,7 @@ export function RankingCardList({ rankings }: RankingCardListProps) {
                 </Button>
               </Link>
               <Link 
-                href={`/best-residences/${ranking.rankingCategorySlug}`} 
+                href={`/rankings/${ranking.rankingCategorySlug}`} 
                 target="_blank"
               >
                 <Button variant="ghost" size="sm">

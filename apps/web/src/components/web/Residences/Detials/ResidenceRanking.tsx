@@ -122,7 +122,7 @@ export function ResidenceRanking({ residenceId, totalScores = [] }: ResidenceRan
             variant="outline"
             size="sm"
             className="flex items-center gap-2"
-            onClick={() => window.open(`/best-residences/${row.original.rankingCategory.slug}`, '_blank')}
+            onClick={() => window.open(`/rankings/${row.original.rankingCategory.slug}`, '_blank')}
           >
             <Eye className="h-4 w-4 mr-1" />
             View

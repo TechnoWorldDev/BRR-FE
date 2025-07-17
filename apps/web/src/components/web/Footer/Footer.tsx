@@ -124,19 +124,19 @@ export default function Footer() {
             <h3 className="text-xl font-bold text-primary-link">Rankings</h3>
             <ul className="flex flex-col gap-1">
               <li>
-                <Link href="/best-residences/top-50-worldwide">Worldwide</Link>
+                <Link href="/rankings/top-50-worldwide">Worldwide</Link>
               </li>
               <li>
-                <Link href="/best-residences/countries">By Country</Link>
+                <Link href="/rankings/countries">By Country</Link>
               </li>
               <li>
-                <Link href="/best-residences/cities">By City</Link>
+                <Link href="/rankings/cities">By City</Link>
               </li>
               <li>
-                <Link href="/best-residences/lifestyle">By Lifestyle</Link>
+                <Link href="/rankings/lifestyle">By Lifestyle</Link>
               </li>
               <li>
-                <Link href="/best-residences/brands">By Brand</Link>
+                <Link href="/rankings/brands">By Brand</Link>
               </li>
             </ul>
           </div>
@@ -155,7 +155,7 @@ export default function Footer() {
                 <Link href="/leave-a-review">Leave a Review</Link>
               </li>
               <li>
-                <Link href="/residences">All Residences</Link>
+                <Link href="/directory">All Residences</Link>
               </li>
               <li>
                 <Link href="/brands">All Brands</Link>
@@ -192,7 +192,7 @@ export default function Footer() {
                 <Link href="/investor-relations">Investor Relations</Link>
               </li>
               <li>
-                <Link href="/developer/residences/create">Register Your Residence</Link>
+                <Link href="/developer/directory/create">Register Your Residence</Link>
               </li>
             </ul>
           </div>

@@ -69,10 +69,10 @@ export function DeveloperResidenceCard({ residence }: DeveloperResidenceCardProp
           {formatText(residence.status)}
         </span>
         <div className="flex items-center gap-2">
-          <Link href={`/developer/residences/${residence.slug || residence.id}/edit`} className="text-xs font-medium border flex items-center justify-center px-2 py-2 rounded-md bg-secondary hover:bg-white/5 transition-all">
+          <Link href={`/developer/directory/${residence.slug || residence.id}/edit`} className="text-xs font-medium border flex items-center justify-center px-2 py-2 rounded-md bg-secondary hover:bg-white/5 transition-all">
             <Pencil className="w-4 h-4" />
           </Link>
-          <Link href={`/developer/residences/${residence.slug}`} className="text-xs font-medium border flex items-center justify-center px-2 py-2 rounded-md bg-secondary hover:bg-white/5 transition-all">
+          <Link href={`/developer/directory/${residence.slug}`} className="text-xs font-medium border flex items-center justify-center px-2 py-2 rounded-md bg-secondary hover:bg-white/5 transition-all">
             <Eye className="w-4 h-4" />
           </Link>
         </div>

@@ -23,7 +23,7 @@ export default function MultiStepResidenceFormEdit() {
       try {
         const baseUrl = process.env.NEXT_PUBLIC_API_URL;
         const apiVersion = process.env.NEXT_PUBLIC_API_VERSION || "v1";
-        const res = await fetch(`${baseUrl}/api/${apiVersion}/public/residences/slug/${slug}`);
+        const res = await fetch(`${baseUrl}/api/${apiVersion}/public/directory/slug/${slug}`);
         if (!res.ok) throw new Error("Failed to fetch residence");
         const data = await res.json();
         setResidence(data.data);

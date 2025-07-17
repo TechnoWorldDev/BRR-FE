@@ -479,7 +479,7 @@ export default function MultiStepResidenceForm({ initialValues, isEdit, initialI
       console.log("Final data to send:", dataToSend);
 
       const response = await fetch(
-        `${API_BASE_URL}/api/${API_VERSION}/residences/${residenceId}`,
+        `${API_BASE_URL}/api/${API_VERSION}/directory/${residenceId}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },

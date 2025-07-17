@@ -67,19 +67,19 @@ const CACHE_KEYS = {
 export const navigationData: NavigationData = {
   rankings: {
     title: "Rankings",
-    href: "/best-residences",
+    href: "/rankings",
     tabs: [],
     content: {},
   },
   bestResidences: {
     title: "Best Residences",
-    href: "/best-residences",
+    href: "/rankings",
     tabs: [], // Biće popunjeno dinamički
     content: {}, // Biće popunjeno dinamički
   },
   allResidences: {
     title: "All Residences",
-    href: "/residences",
+    href: "/directory",
     tabs: ["Country", "City", "Geographical Area", "Brands"],
     content: {
       Country: [], // Biće popunjeno dinamički
@@ -400,7 +400,7 @@ export async function getContinents(): Promise<MenuItem[]> {
     // Transform continents to menu items
     const continentMenuItems = continents.map((continent) => ({
       label: continent.name,
-      href: `/residences/continent/${continent.slug || continent.name.toLowerCase().replace(/\s+/g, "-")}`,
+      href: `/directory/continent/${continent.slug || continent.name.toLowerCase().replace(/\s+/g, "-")}`,
     }));
 
     // Check if "Worldwide" already exists in the API results
@@ -414,7 +414,7 @@ export async function getContinents(): Promise<MenuItem[]> {
     if (!hasWorldwide) {
       continentMenuItems.unshift({
         label: "Worldwide",
-        href: "/residences/continent/wordwide",
+        href: "/directory/continent/wordwide",
       });
     }
 
@@ -432,7 +432,7 @@ export async function getContinents(): Promise<MenuItem[]> {
     return sortedItems;
   } catch (error) {
     console.error("Error loading continents:", error);
-    return [{ label: "Worldwide", href: "/residences/continent/wordwide" }]; // Return at least Worldwide option
+    return [{ label: "Worldwide", href: "/directory/continent/wordwide" }]; // Return at least Worldwide option
   }
 }
 
@@ -445,7 +445,7 @@ export async function getCities(): Promise<MenuItem[]> {
 
   const cityMenuItems = await fetchAllPages(fetchCitiesPage, (city: City) => ({
     label: city.name,
-    href: `/residences/city/${city.name.toLowerCase().replace(/\s+/g, "-")}`,
+    href: `/directory/city/${city.name.toLowerCase().replace(/\s+/g, "-")}`,
   }));
 
   // Cache results
@@ -465,7 +465,7 @@ export async function getCountries(): Promise<MenuItem[]> {
     fetchCountriesPage,
     (country: Country) => ({
       label: country.name,
-      href: `/residences/country/${country.name.toLowerCase().replace(/\s+/g, "-")}`,
+      href: `/directory/country/${country.name.toLowerCase().replace(/\s+/g, "-")}`,
     })
   );
 
@@ -486,7 +486,7 @@ export async function getBrands(): Promise<MenuItem[]> {
     fetchBrandsPage,
     (brand: Brand) => ({
       label: brand.name,
-      href: `/residences/brand/${brand.slug || brand.name.toLowerCase().replace(/\s+/g, "-")}`,
+      href: `/directory/brand/${brand.slug || brand.name.toLowerCase().replace(/\s+/g, "-")}`,
     })
   );
 
@@ -523,7 +523,7 @@ export async function getRankingCategories(): Promise<{
       categoriesByType[type.name] = categories
         .map((category) => ({
           label: category.title,
-          href: `/best-residences/${category.slug || category.name.toLowerCase().replace(/\s+/g, "-")}`,
+          href: `/rankings/${category.slug || category.name.toLowerCase().replace(/\s+/g, "-")}`,
         }))
         .sort((a, b) => a.label.localeCompare(b.label));
     }

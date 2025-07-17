@@ -193,7 +193,7 @@ export default function LifestyleBestResidencesClient() {
                     category={category}
                     baseUrl={baseUrl!}
                     apiVersion={apiVersion!}
-                    url={`/best-residences/lifestyle/${category.slug}`}
+                    url={`/rankings/lifestyle/${category.slug}`}
                   />
                 ))}
               </div>

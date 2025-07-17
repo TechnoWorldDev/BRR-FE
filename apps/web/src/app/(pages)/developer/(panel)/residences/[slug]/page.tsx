@@ -41,7 +41,7 @@ export default function ResidencesSingle() {
       
       const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       const apiVersion = process.env.NEXT_PUBLIC_API_VERSION || "v1";
-      const response = await fetch(`${baseUrl}/api/${apiVersion}/public/residences/slug/${residenceSlug}`);
+      const response = await fetch(`${baseUrl}/api/${apiVersion}/public/directory/slug/${residenceSlug}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch residence');

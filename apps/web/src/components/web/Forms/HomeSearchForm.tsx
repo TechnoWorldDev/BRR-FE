@@ -225,7 +225,7 @@ export default function HomeSearchForm() {
   const handleSearch = () => {
     const selected = categoryOptions.find(cat => cat.id === selectedOption);
     if (selectedCategory && selected) {
-      router.push(`/best-residences/${selected.slug}`);
+      router.push(`/rankings/${selected.slug}`);
     }
   };
 

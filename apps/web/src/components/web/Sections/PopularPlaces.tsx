@@ -10,17 +10,17 @@ export default function PopularPlaces() {
       links: [
         {
           text: "Top 50 in Worldwide",
-          url: "/best-residences/top-50-worldwide",
+          url: "/rankings/top-50-worldwide",
         },
-        { text: "Top 10 in Asia", url: "/best-residences/top-10-in-asia" },
-        { text: "Top 10 in Europe", url: "/best-residences/top-10-in-europe" },
+        { text: "Top 10 in Asia", url: "/rankings/top-10-in-asia" },
+        { text: "Top 10 in Europe", url: "/rankings/top-10-in-europe" },
         {
           text: "Top 10 in North America",
-          url: "/best-residences/top-10-in-north-america",
+          url: "/rankings/top-10-in-north-america",
         },
         {
           text: "Top 10 in South America",
-          url: "/best-residences/top-10-in-south-america",
+          url: "/rankings/top-10-in-south-america",
         },
       ],
     },
@@ -31,29 +31,29 @@ export default function PopularPlaces() {
       links: [
         {
           text: "Top 10 in New York, USA",
-          url: "/best-residences/top-10-in-new-york-usa",
+          url: "/rankings/top-10-in-new-york-usa",
         },
         {
           text: "Top 10 in Dubai, UAE",
-          url: "/best-residences/top-10-in-dubai-uae",
+          url: "/rankings/top-10-in-dubai-uae",
         },
         {
           text: "Top 10 in Miami, USA",
-          url: "/best-residences/top-10-in-miami-usa",
+          url: "/rankings/top-10-in-miami-usa",
         },
         {
           text: "Top 10 in Bangkok, Thailand",
-          url: "/best-residences/top-10-in-bangkok-thailand",
+          url: "/rankings/top-10-in-bangkok-thailand",
         },
         {
           text: "Top 10 in London, UK",
-          url: "/best-residences/top-10-in-london-uk",
+          url: "/rankings/top-10-in-london-uk",
         },
-        // { text: "Top 10 in Boston, United States", url: "/best-residences/ajman" },
-        // { text: "Top 10 in Phuket, Thailand", url: "/best-residences/ajman" },
-        // { text: "Top 10 in Istanbul, Turkey", url: "/best-residences/ajman" },
-        // { text: "Top 10 in São Paulo, Brazil", url: "/best-residences/ajman" },
-        // { text: "Top 10 in Abu Dhabi, UAE", url: "/best-residences/ajman" },
+        // { text: "Top 10 in Boston, United States", url: "/rankings/ajman" },
+        // { text: "Top 10 in Phuket, Thailand", url: "/rankings/ajman" },
+        // { text: "Top 10 in Istanbul, Turkey", url: "/rankings/ajman" },
+        // { text: "Top 10 in São Paulo, Brazil", url: "/rankings/ajman" },
+        // { text: "Top 10 in Abu Dhabi, UAE", url: "/rankings/ajman" },
       ],
     },
     {
@@ -63,23 +63,23 @@ export default function PopularPlaces() {
       links: [
         {
           text: "Best for Beachfront Living",
-          url: "/best-residences/best-for-beachfront-living",
+          url: "/rankings/best-for-beachfront-living",
         },
         {
           text: "Best for Newest Branded Residences",
-          url: "/best-residences/best-for-newest-branded-residences",
+          url: "/rankings/best-for-newest-branded-residences",
         },
         {
           text: "Best for Investment Opportunities",
-          url: "/best-residences/best-for-investment-opportunities",
+          url: "/rankings/best-for-investment-opportunities",
         },
         {
           text: "Best for Golf Living",
-          url: "/best-residences/best-for-golf-living",
+          url: "/rankings/best-for-golf-living",
         },
         {
           text: "Best for Green Energy",
-          url: "/best-residences/best-for-green-energy",
+          url: "/rankings/best-for-green-energy",
         },
       ],
     },
@@ -90,28 +90,28 @@ export default function PopularPlaces() {
       links: [
         {
           text: "Top 10 in United Arab Emirates",
-          url: "/best-residences/top-10-in-united-arab-emirates",
+          url: "/rankings/top-10-in-united-arab-emirates",
         },
         {
           text: "Top 10 in United Kingdom",
-          url: "/best-residences/top-10-in-united-kingdom",
+          url: "/rankings/top-10-in-united-kingdom",
         },
-        { text: "Top 10 in China", url: "/best-residences/top-10-in-china" },
-        { text: "Top 10 in USA", url: "/best-residences/top-10-in-usa" },
+        { text: "Top 10 in China", url: "/rankings/top-10-in-china" },
+        { text: "Top 10 in USA", url: "/rankings/top-10-in-usa" },
         {
           text: "Top 10 in Thailand",
-          url: "/best-residences/top-10-in-thailand",
+          url: "/rankings/top-10-in-thailand",
         },
-        { text: "Top 10 in Canada", url: "/best-residences/top-10-in-canada" },
+        { text: "Top 10 in Canada", url: "/rankings/top-10-in-canada" },
         {
           text: "Top 10 in Malaysia",
-          url: "/best-residences/top-10-in-malaysia",
+          url: "/rankings/top-10-in-malaysia",
         },
-        { text: "Top 10 in Brazil", url: "/best-residences/top-10-in-brazil" },
-        { text: "Top 10 in Egypt", url: "/best-residences/top-10-in-egypt" },
+        { text: "Top 10 in Brazil", url: "/rankings/top-10-in-brazil" },
+        { text: "Top 10 in Egypt", url: "/rankings/top-10-in-egypt" },
         {
           text: "Top 10 in Morocco",
-          url: "/best-residences/top-10-in-morocco",
+          url: "/rankings/top-10-in-morocco",
         },
       ],
     },
@@ -122,43 +122,43 @@ export default function PopularPlaces() {
       links: [
         {
           text: "Top 10 in Aman",
-          url: "/best-residences/top-10-aman-residences",
+          url: "/rankings/top-10-aman-residences",
         },
         {
           text: "Top 10 in Ritz-Carlton",
-          url: "/best-residences/top-10-ritz-carlton-residences",
+          url: "/rankings/top-10-ritz-carlton-residences",
         },
         {
           text: "Top 10 in Banyan Tree",
-          url: "/best-residences/top-10-banyan-tree-residences",
+          url: "/rankings/top-10-banyan-tree-residences",
         },
         {
           text: "Top 10 in Dorchester",
-          url: "/best-residences/top-10-dorchester-residences",
+          url: "/rankings/top-10-dorchester-residences",
         },
         {
           text: "Top 10 in Nobu",
-          url: "/best-residences/top-10-nobu-residences",
+          url: "/rankings/top-10-nobu-residences",
         },
         {
           text: "Top 10 in Mandarin Oriental",
-          url: "/best-residences/top-10-mandarin-oriental-residences",
+          url: "/rankings/top-10-mandarin-oriental-residences",
         },
         {
           text: "Top 10 in Fairmont",
-          url: "/best-residences/top-10-fairmont-residences",
+          url: "/rankings/top-10-fairmont-residences",
         },
         {
           text: "Top 10 in Montage",
-          url: "/best-residences/top-10-montage-residences",
+          url: "/rankings/top-10-montage-residences",
         },
         {
           text: "Top 10 in Trump",
-          url: "/best-residences/top-10-trump-residences",
+          url: "/rankings/top-10-trump-residences",
         },
         {
           text: "Top 10 in Four Seasons",
-          url: "/best-residences/top-10-four-seasons-residences",
+          url: "/rankings/top-10-four-seasons-residences",
         },
       ],
     },

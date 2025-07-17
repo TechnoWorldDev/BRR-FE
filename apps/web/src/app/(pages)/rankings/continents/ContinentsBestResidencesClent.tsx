@@ -181,7 +181,7 @@ export default function ContinentsBestResidencesClient() {
                                         category={category}
                                         baseUrl={baseUrl!}
                                         apiVersion={apiVersion!}
-                                        url={`/best-residences/continents/${category.slug}`}
+                                        url={`/rankings/continents/${category.slug}`}
                                     />
                                 ))}
                             </div>

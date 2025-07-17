@@ -23,7 +23,7 @@ export default function DeveloperResidences() {
         try {
             setLoading(true);
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/residences/me?limit=${itemsPerPage}&page=${page}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/directory/me?limit=${itemsPerPage}&page=${page}`,
                 {
                     method: 'GET',
                     credentials: 'include',
@@ -53,7 +53,7 @@ export default function DeveloperResidences() {
     }, [currentPage]);
 
     const handleAddResidence = () => {
-        router.push('/developer/residences/create');
+        router.push('/developer/directory/create');
     };
 
     const handlePageChange = (page: number) => {

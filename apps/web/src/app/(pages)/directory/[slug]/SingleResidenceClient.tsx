@@ -127,7 +127,7 @@ const RankingBadge = ({ rankingScore }: { rankingScore: RankingScore }) => {
 
     return (
         <Link
-            href={`/best-residences/${rankingCategory.slug}`}
+            href={`/rankings/${rankingCategory.slug}`}
             className="bg-white/5 py-2 px-3 rounded-full w-fit flex gap-2 items-center hover:bg-white/10 transition-colors duration-200"
         >
             {getRankingIcon(position)}
@@ -171,7 +171,7 @@ export default function SingleResidenceClient() {
     useEffect(() => {
         const fetchResidence = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/public/residences/slug/${residenceSlug}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/public/directory/slug/${residenceSlug}`);
                 const data = await response.json();
                 setResidence(data.data);
 
@@ -244,7 +244,7 @@ export default function SingleResidenceClient() {
     const handleClaimProfile = () => {
         if (!user) {
             // Ako nije prijavljen, preusmeriti na login stranicu sa parametrom za povratak
-            const returnUrl = `/residences/${residenceSlug}?fromClaim=true`;
+            const returnUrl = `/directory/${residenceSlug}?fromClaim=true`;
             router.push(`/login?returnUrl=${encodeURIComponent(returnUrl)}`);
         } else if (user.role.name === "developer") {
             // Ako je developer, otvoriti modal

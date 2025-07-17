@@ -118,7 +118,7 @@ export default function RankingDirectory() {
                             {categories[type.id]?.map((category) => (
                                 <Link 
                                     key={category.id}
-                                    href={`/best-residences/${category.slug}`}
+                                    href={`/rankings/${category.slug}`}
                                     className="text-white inline-block hover:text-primary transition-colors"
                                 >
                                     {category.name}

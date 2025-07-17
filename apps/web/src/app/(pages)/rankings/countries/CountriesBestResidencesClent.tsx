@@ -4,9 +4,6 @@ import SectionLayout from "@/components/web/SectionLayout";
 import RankingCard from "@/components/web/Ranking/RankingCard";
 import { Pagination } from "@/components/common/Pagination";
 import React from "react";
-import type { Metadata } from 'next'
-
-
 
 // Skeleton component
 const Skeleton = ({ className }: { className?: string }) => (
@@ -37,7 +34,7 @@ interface CategoriesResponse {
     pagination: PaginationData;
 }
 
-export default function BrandBestResidencesClient() {
+export default function CountriesBestResidencesClient() {
     const [data, setData] = useState<RankingCategory[]>([]);
     const [pagination, setPagination] = useState<PaginationData>({
         total: 0,
@@ -50,9 +47,9 @@ export default function BrandBestResidencesClient() {
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const apiVersion = process.env.NEXT_PUBLIC_API_VERSION;
-    const categoryTypeId = '1d917665-1159-4c08-8b7f-715bbfac5b3e'; // Brands ID
+    const categoryTypeId = 'ef03dc8f-ccde-464c-9e36-1ff9d3c79645'; // Countries ID
 
-    // Fetch brands ranking categories data
+    // Fetch countries data
     const fetchData = useCallback(async (page: number) => {
         if (!baseUrl || !apiVersion) return;
 
@@ -64,7 +61,7 @@ export default function BrandBestResidencesClient() {
             const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error(`Failed to fetch brand categories: ${response.status}`);
+                throw new Error(`Failed to fetch countries: ${response.status}`);
             }
 
             const result: CategoriesResponse = await response.json();
@@ -72,7 +69,7 @@ export default function BrandBestResidencesClient() {
             setData(result.data || []);
             setPagination(result.pagination);
         } catch (err) {
-            console.error('Error fetching brand categories:', err);
+            console.error('Error fetching countries:', err);
             setError(err instanceof Error ? err.message : 'Unknown error occurred');
         } finally {
             setLoading(false);
@@ -119,8 +116,8 @@ export default function BrandBestResidencesClient() {
                 {/* Content Skeleton */}
                 <SectionLayout>
                     <div className="w-full xl:max-w-[1600px] mx-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                            {Array.from({ length: 16 }, (_, i) => (
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
+                            {Array.from({ length: 12 }, (_, i) => (
                                 <CardSkeleton key={i} />
                             ))}
                         </div>
@@ -137,8 +134,8 @@ export default function BrandBestResidencesClient() {
                 <div className="flex flex-col items-center rounded-b-xl bg-secondary max-w-[calc(100svw-1.5rem)] 2xl:max-w-[calc(100svw-4rem)] mx-auto px-4 lg:px-12 py-12 gap-4 xl:gap-12 mb-12">
                     <div className="w-full xl:max-w-[1600px] mx-auto">
                         <div className="page-header flex flex-col gap-6 w-full lg:w-1/2 mx-auto ms-0">
-                            <p className="text-md uppercase text-left text-primary">LUXURY BRAND COLLECTIONS</p>
-                            <h1 className="text-4xl font-bold text-left">Best Branded Residences by Brands</h1>
+                            <p className="text-md uppercase text-left text-primary">BEST WORLDWIDE RESIDENCES</p>
+                            <h1 className="text-4xl font-bold text-left">Best Branded Residences by Countries</h1>
                         </div>
                     </div>
                 </div>
@@ -157,12 +154,12 @@ export default function BrandBestResidencesClient() {
             <div className="flex flex-col items-center rounded-b-xl bg-secondary max-w-[calc(100svw-1.5rem)] 2xl:max-w-[calc(100svw-4rem)] mx-auto px-4 lg:px-12 py-12 gap-4 xl:gap-12 mb-12">
                 <div className="w-full xl:max-w-[1600px] mx-auto">
                     <div className="page-header flex flex-col gap-6 w-full lg:w-1/2 mx-auto ms-0">
-                        <p className="text-md uppercase text-left text-primary">LUXURY BRAND COLLECTIONS</p>
+                        <p className="text-md uppercase text-left text-primary">BEST WORLDWIDE RESIDENCES</p>
                         <h1 className="text-4xl font-bold text-left">
-                            Best Branded Residences by Brands
+                            Best Branded Residences by Countries
                         </h1>
                         <p className="text-lg text-white/80">
-                            Browse residences by prestigious luxury brands and explore exclusive collections from world-renowned developers and designers.
+                            Find top branded residences in countries around the world and discover luxury living opportunities in your preferred destination.
                         </p>
                     </div>
                 </div>
@@ -173,7 +170,7 @@ export default function BrandBestResidencesClient() {
                 <div className="w-full xl:max-w-[1600px] mx-auto">
                     {data.length === 0 && !loading ? (
                         <div className="text-center text-white text-xl py-12">
-                            No brand categories found.
+                            No countries found.
                         </div>
                     ) : (
                         <>
@@ -184,8 +181,7 @@ export default function BrandBestResidencesClient() {
                                         category={category}
                                         baseUrl={baseUrl!}
                                         apiVersion={apiVersion!}
-                                        url={`/best-residences/${category.slug}`}
-
+                                        url={`/rankings/countries/${category.slug}`}
                                     />
                                 ))}
                             </div>

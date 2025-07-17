@@ -40,14 +40,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const categories = await getAllCategories()
     
     const residenceUrls = residences.map((residence: any) => ({
-      url: joinUrls(baseUrl, `/residences/${residence.slug}`),
+      url: joinUrls(baseUrl, `/directory/${residence.slug}`),
       lastModified: new Date(residence.updatedAt || Date.now()),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     }))
     
     const categoryUrls = categories.map((category: any) => ({
-      url: joinUrls(baseUrl, `/best-residences/${category.slug}`),
+      url: joinUrls(baseUrl, `/rankings/${category.slug}`),
       lastModified: new Date(category.updatedAt || Date.now()),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
