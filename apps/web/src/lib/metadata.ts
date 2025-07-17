@@ -63,7 +63,7 @@ export interface PageMetadata {
 
 export interface BlogMetadata {
   type: 'blog'
-  data: {
+  data: { 
     search?: string
     category?: string
     author?: string
