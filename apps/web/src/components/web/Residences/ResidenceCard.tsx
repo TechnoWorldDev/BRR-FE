@@ -153,8 +153,8 @@ export function ResidenceCard({ residence, score, isFavorite = false, onFavorite
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-secondary">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/media/${residence.brand.logo.id}/content`}
-                alt={residence.brand.name}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/media/${residence?.brand?.logo?.id}/content`}
+                alt={residence?.brand?.name || ''}
                 width={100}
                 height={100}
                 className="object-cover w-[30%] h-auto"
@@ -190,9 +190,9 @@ export function ResidenceCard({ residence, score, isFavorite = false, onFavorite
           <h3 className="text-xl text-white font-medium transition-all">{residence.name}</h3>
           
           <p className="text-md text-muted-foreground">
-            {residence.description.length > 150 
-              ? `${residence.description.substring(0, 80)}...` 
-              : residence.description}
+            {residence?.description?.length > 150 
+              ? `${residence?.description?.substring(0, 80)}...` 
+              : residence?.description}
           </p>
         </div>
     </Link>

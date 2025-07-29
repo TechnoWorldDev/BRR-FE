@@ -51,11 +51,13 @@ export default function ResidencesSlider() {
         }}
         className="residences-swiper"
       >
-        {residences.map((residence) => (
-          <SwiperSlide key={residence.id}>
-            <ResidenceCard residence={residence} />
-          </SwiperSlide>
-        ))}
+        {residences.length > 0 && residences
+          .filter((residence) => residence && residence.id)
+          .map((residence) => (
+            <SwiperSlide key={residence.id}>
+              <ResidenceCard residence={residence} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

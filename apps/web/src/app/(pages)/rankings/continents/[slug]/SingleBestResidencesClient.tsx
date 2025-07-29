@@ -515,9 +515,9 @@ export default function SingleBestResidencesClient() {
                                                 
                                                 <h2 className="text-2xl lg:text-3xl font-bold">{residence.name}</h2>
                                                 <p className="text-white text-sm lg:text-base">
-                                                    {residence.description.length > 150 
-                                                        ? `${residence.description.slice(0, 250)}...`
-                                                        : residence.description}
+                                                    {residence?.description?.length > 150 
+                                                        ? `${residence?.description?.slice(0, 250)}...`
+                                                        : residence?.description}
                                                 </p>
                                                 <button
                                                     onClick={(e) => {

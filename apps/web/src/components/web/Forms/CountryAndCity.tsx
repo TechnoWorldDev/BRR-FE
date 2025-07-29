@@ -30,7 +30,13 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { API_BASE_URL, API_VERSION } from "@/app/constants/api";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface PhoneCode {
   id: string;
@@ -136,38 +142,73 @@ interface AddCityFormData {
 const countrySchema = z.object({
   name: z.string().min(1, "Name is required"),
   code: z.string().min(1, "Code is required"),
-  tld: z.string().min(1, "TLD is required").max(10, "TLD must be shorter than or equal to 10 characters"),
-  currencyCode: z.string().min(1, "Currency code is required").max(3, "Currency code must be shorter than or equal to 3 characters"),
-  currencyName: z.string().min(1, "Currency name is required").max(50, "Currency name must be shorter than or equal to 50 characters"),
-  currencySymbol: z.string().min(1, "Currency symbol is required").max(5, "Currency symbol must be shorter than or equal to 5 characters"),
-  capital: z.string().min(1, "Capital is required").max(100, "Capital must be shorter than or equal to 100 characters"),
-  phoneCodes: z.array(z.string().max(16, "Phone code must be shorter than or equal to 16 characters")).min(1, "At least one phone code is required"),
-  subregion: z.string().min(1, "Subregion is required").max(50, "Subregion must be shorter than or equal to 50 characters"),
-  flag: z.string().min(1, "Flag URL is required").max(255, "Flag URL must be shorter than or equal to 255 characters"),
+  tld: z
+    .string()
+    .min(1, "TLD is required")
+    .max(10, "TLD must be shorter than or equal to 10 characters"),
+  currencyCode: z
+    .string()
+    .min(1, "Currency code is required")
+    .max(3, "Currency code must be shorter than or equal to 3 characters"),
+  currencyName: z
+    .string()
+    .min(1, "Currency name is required")
+    .max(50, "Currency name must be shorter than or equal to 50 characters"),
+  currencySymbol: z
+    .string()
+    .min(1, "Currency symbol is required")
+    .max(5, "Currency symbol must be shorter than or equal to 5 characters"),
+  capital: z
+    .string()
+    .min(1, "Capital is required")
+    .max(100, "Capital must be shorter than or equal to 100 characters"),
+  phoneCodes: z
+    .array(
+      z
+        .string()
+        .max(16, "Phone code must be shorter than or equal to 16 characters")
+    )
+    .min(1, "At least one phone code is required"),
+  subregion: z
+    .string()
+    .min(1, "Subregion is required")
+    .max(50, "Subregion must be shorter than or equal to 50 characters"),
+  flag: z
+    .string()
+    .min(1, "Flag URL is required")
+    .max(255, "Flag URL must be shorter than or equal to 255 characters"),
   continentId: z.string().uuid("Continent ID must be a valid UUID"),
 });
 
 const citySchema = z.object({
   name: z.string().min(1, "Name is required"),
   asciiName: z.string().min(1, "ASCII name is required"),
-  population: z.preprocess((val) => val === '' ? undefined : Number(val), z.number().int().min(1, "Population must be a positive number")),
+  population: z.preprocess(
+    (val) => (val === "" ? undefined : Number(val)),
+    z.number().int().min(1, "Population must be a positive number")
+  ),
   timezone: z.string().min(1, "Timezone is required"),
   xCoordinate: z.string().min(1, "X coordinate is required"),
   yCoordinate: z.string().min(1, "Y coordinate is required"),
   countryId: z.string().uuid("Country ID must be a valid UUID"),
 });
 
-export function CountryAndCity({ 
-  defaultCountryId, 
+export function CountryAndCity({
+  defaultCountryId,
   defaultCityId,
-  onCountrySelect, 
-  onCitySelect 
-}: CountryAndCityProps) {
+  onCountrySelect,
+  onCitySelect,
+  className,
+  style,
+}: CountryAndCityProps & { className?: string; style?: React.CSSProperties }) {
+  
   const [countryOpen, setCountryOpen] = React.useState(false);
   const [cityOpen, setCityOpen] = React.useState(false);
   const [countryValue, setCountryValue] = React.useState<string>("");
   const [cityValue, setCityValue] = React.useState<string>("");
-  const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(null);
+  const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(
+    null
+  );
   const [selectedCity, setSelectedCity] = React.useState<City | null>(null);
   const [countries, setCountries] = React.useState<Country[]>([]);
   const [cities, setCities] = React.useState<City[]>([]);
@@ -201,79 +242,89 @@ export function CountryAndCity({
   const [newCity, setNewCity] = React.useState<AddCityFormData>({
     name: "",
     asciiName: "",
-    population: '',
+    population: "",
     timezone: "",
     xCoordinate: "",
     yCoordinate: "",
     countryId: "",
   });
-  const [countryErrors, setCountryErrors] = React.useState<Partial<Record<keyof AddCountryFormData, string>>>({});
-  const [cityErrors, setCityErrors] = React.useState<Partial<Record<keyof AddCityFormData, string>>>({});
+  const [countryErrors, setCountryErrors] = React.useState<
+    Partial<Record<keyof AddCountryFormData, string>>
+  >({});
+  const [cityErrors, setCityErrors] = React.useState<
+    Partial<Record<keyof AddCityFormData, string>>
+  >({});
   const [continents, setContinents] = React.useState<Continent[]>([]);
   const [isContinentsLoading, setIsContinentsLoading] = React.useState(false);
-  
+
   // Tracking whether we've loaded initial data
   const [countriesLoaded, setCountriesLoaded] = React.useState(false);
   const [defaultsHandled, setDefaultsHandled] = React.useState(false);
 
-  const fetchCountries = React.useCallback(async (query = "", page = 1, append = false) => {
-    setIsCountryLoading(true);
-    try {
-      const url = new URL(`${API_BASE_URL}/api/${API_VERSION}/countries`);
-      url.searchParams.set("limit", "20");
-      url.searchParams.set("page", page.toString());
-      if (query) url.searchParams.set("query", query);
+  const fetchCountries = React.useCallback(
+    async (query = "", page = 1, append = false) => {
+      setIsCountryLoading(true);
+      try {
+        const url = new URL(`${API_BASE_URL}/api/${API_VERSION}/countries`);
+        url.searchParams.set("limit", "20");
+        url.searchParams.set("page", page.toString());
+        if (query) url.searchParams.set("query", query);
 
-      const res = await fetch(url.toString(), { credentials: "include" });
-      const data: CountriesResponse = await res.json();
+        const res = await fetch(url.toString(), { credentials: "include" });
+        const data: CountriesResponse = await res.json();
 
-      if (append) {
-        setCountries((prev) => [...prev, ...data.data]);
-      } else {
-        setCountries(data.data);
+        if (append) {
+          setCountries((prev) => [...prev, ...data.data]);
+        } else {
+          setCountries(data.data);
+        }
+        setHasMoreCountries(page < data.pagination.totalPages);
+        setCountryCurrentPage(page);
+
+        if (!countriesLoaded) {
+          setCountriesLoaded(true);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!append) setCountries([]);
+      } finally {
+        setIsCountryLoading(false);
       }
-      setHasMoreCountries(page < data.pagination.totalPages);
-      setCountryCurrentPage(page);
-      
-      if (!countriesLoaded) {
-        setCountriesLoaded(true);
+    },
+    [countriesLoaded]
+  );
+
+  const fetchCities = React.useCallback(
+    async (countryId: string, query = "", page = 1, append = false) => {
+      if (!countryId) return;
+
+      setIsCityLoading(true);
+      try {
+        const url = new URL(`${API_BASE_URL}/api/${API_VERSION}/cities`);
+        url.searchParams.set("countryId", countryId);
+        url.searchParams.set("limit", "20");
+        url.searchParams.set("page", page.toString());
+        if (query) url.searchParams.set("query", query);
+
+        const res = await fetch(url.toString(), { credentials: "include" });
+        const data: CitiesResponse = await res.json();
+
+        if (append) {
+          setCities((prev) => [...prev, ...data.data]);
+        } else {
+          setCities(data.data);
+        }
+        setHasMoreCities(page < data.pagination.totalPages);
+        setCityCurrentPage(page);
+      } catch (err) {
+        console.error(err);
+        if (!append) setCities([]);
+      } finally {
+        setIsCityLoading(false);
       }
-    } catch (err) {
-      console.error(err);
-      if (!append) setCountries([]);
-    } finally {
-      setIsCountryLoading(false);
-    }
-  }, [countriesLoaded]);
-
-  const fetchCities = React.useCallback(async (countryId: string, query = "", page = 1, append = false) => {
-    if (!countryId) return;
-    
-    setIsCityLoading(true);
-    try {
-      const url = new URL(`${API_BASE_URL}/api/${API_VERSION}/cities`);
-      url.searchParams.set("countryId", countryId);
-      url.searchParams.set("limit", "20");
-      url.searchParams.set("page", page.toString());
-      if (query) url.searchParams.set("query", query);
-
-      const res = await fetch(url.toString(), { credentials: "include" });
-      const data: CitiesResponse = await res.json();
-
-      if (append) {
-        setCities((prev) => [...prev, ...data.data]);
-      } else {
-        setCities(data.data);
-      }
-      setHasMoreCities(page < data.pagination.totalPages);
-      setCityCurrentPage(page);
-    } catch (err) {
-      console.error(err);
-      if (!append) setCities([]);
-    } finally {
-      setIsCityLoading(false);
-    }
-  }, []);
+    },
+    []
+  );
 
   // Load countries when popover opens or search changes
   React.useEffect(() => {
@@ -318,26 +369,31 @@ export function CountryAndCity({
       if (defaultCountryId && defaultCountryId !== countryValue) {
         console.log(`Setting default country: ${defaultCountryId}`);
         setCountryValue(defaultCountryId);
-        
+
         // Check if country exists in loaded list
-        const existingCountry = countries.find(c => c.id === defaultCountryId);
+        const existingCountry = countries.find(
+          (c) => c.id === defaultCountryId
+        );
         if (existingCountry) {
           setSelectedCountry(existingCountry);
         } else {
           // Fetch country details if not in list
           try {
-            const res = await fetch(`${API_BASE_URL}/api/${API_VERSION}/countries/${defaultCountryId}`, { 
-              credentials: "include" 
-            });
-            
+            const res = await fetch(
+              `${API_BASE_URL}/api/${API_VERSION}/countries/${defaultCountryId}`,
+              {
+                credentials: "include",
+              }
+            );
+
             if (res.ok) {
               const response = await res.json();
               const countryData = response.data || response;
-              
+
               if (countryData && countryData.id) {
                 setSelectedCountry(countryData);
-                setCountries(prev => {
-                  if (prev.some(c => c.id === countryData.id)) return prev;
+                setCountries((prev) => {
+                  if (prev.some((c) => c.id === countryData.id)) return prev;
                   return [countryData, ...prev];
                 });
               }
@@ -347,25 +403,28 @@ export function CountryAndCity({
           }
         }
       }
-      
+
       // Handle default city ONLY if we have a country
       if (defaultCityId && defaultCountryId) {
         console.log(`Setting default city: ${defaultCityId}`);
         setCityValue(defaultCityId);
-        
+
         try {
-          const res = await fetch(`${API_BASE_URL}/api/${API_VERSION}/cities/${defaultCityId}`, { 
-            credentials: "include" 
-          });
-          
+          const res = await fetch(
+            `${API_BASE_URL}/api/${API_VERSION}/cities/${defaultCityId}`,
+            {
+              credentials: "include",
+            }
+          );
+
           if (res.ok) {
             const response = await res.json();
             const cityData = response.data || response;
-            
+
             if (cityData && cityData.id) {
               setSelectedCity(cityData);
-              setCities(prev => {
-                if (prev.some(c => c.id === cityData.id)) return prev;
+              setCities((prev) => {
+                if (prev.some((c) => c.id === cityData.id)) return prev;
                 return [cityData, ...prev];
               });
             }
@@ -374,34 +433,65 @@ export function CountryAndCity({
           console.error("Error fetching default city:", error);
         }
       }
-      
+
       setDefaultsHandled(true);
     };
 
     handleDefaults();
-  }, [countriesLoaded, defaultsHandled, defaultCountryId, defaultCityId, countryValue, countries]);
+  }, [
+    countriesLoaded,
+    defaultsHandled,
+    defaultCountryId,
+    defaultCityId,
+    countryValue,
+    countries,
+  ]);
 
   // Infinite scrolling for countries
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMoreCountries && !isCountryLoading && countryOpen) {
+        if (
+          entries[0].isIntersecting &&
+          hasMoreCountries &&
+          !isCountryLoading &&
+          countryOpen
+        ) {
           fetchCountries(debouncedCountrySearch, countryCurrentPage + 1, true);
         }
       },
       { threshold: 1.0 }
     );
 
-    if (countryObserverRef.current) observer.observe(countryObserverRef.current);
+    if (countryObserverRef.current)
+      observer.observe(countryObserverRef.current);
     return () => observer.disconnect();
-  }, [debouncedCountrySearch, countryCurrentPage, hasMoreCountries, isCountryLoading, countryOpen, fetchCountries]);
+  }, [
+    debouncedCountrySearch,
+    countryCurrentPage,
+    hasMoreCountries,
+    isCountryLoading,
+    countryOpen,
+    fetchCountries,
+  ]);
 
   // Infinite scrolling for cities
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMoreCities && !isCityLoading && cityOpen && countryValue) {
-          fetchCities(countryValue, debouncedCitySearch, cityCurrentPage + 1, true);
+        if (
+          entries[0].isIntersecting &&
+          hasMoreCities &&
+          !isCityLoading &&
+          cityOpen &&
+          countryValue
+        ) {
+          fetchCities(
+            countryValue,
+            debouncedCitySearch,
+            cityCurrentPage + 1,
+            true
+          );
         }
       },
       { threshold: 1.0 }
@@ -409,14 +499,25 @@ export function CountryAndCity({
 
     if (cityObserverRef.current) observer.observe(cityObserverRef.current);
     return () => observer.disconnect();
-  }, [debouncedCitySearch, cityCurrentPage, hasMoreCities, isCityLoading, cityOpen, countryValue, fetchCities]);
+  }, [
+    debouncedCitySearch,
+    cityCurrentPage,
+    hasMoreCities,
+    isCityLoading,
+    cityOpen,
+    countryValue,
+    fetchCities,
+  ]);
 
   // Load continents
   React.useEffect(() => {
     const fetchContinents = async () => {
       setIsContinentsLoading(true);
       try {
-        const res = await fetch(`${API_BASE_URL}/api/${API_VERSION}/continents`, { credentials: "include" });
+        const res = await fetch(
+          `${API_BASE_URL}/api/${API_VERSION}/continents`,
+          { credentials: "include" }
+        );
         const data: ContinentsResponse = await res.json();
         setContinents(data.data);
       } catch (err) {
@@ -428,13 +529,19 @@ export function CountryAndCity({
     fetchContinents();
   }, []);
 
-  const selectedCountryLabel = selectedCountry?.name || countries.find((c) => c.id === countryValue)?.name || "Select a country...";
-  const selectedCityLabel = selectedCity?.name || cities.find((c) => c.id === cityValue)?.name || "Select a city...";
+  const selectedCountryLabel =
+    selectedCountry?.name ||
+    countries.find((c) => c.id === countryValue)?.name ||
+    "Select a country...";
+  const selectedCityLabel =
+    selectedCity?.name ||
+    cities.find((c) => c.id === cityValue)?.name ||
+    "Select a city...";
 
   const handleAddCountry = async () => {
     try {
       const validationResult = countrySchema.safeParse(newCountry);
-      
+
       if (!validationResult.success) {
         const errors: Partial<Record<keyof AddCountryFormData, string>> = {};
         validationResult.error.errors.forEach((err) => {
@@ -457,7 +564,7 @@ export function CountryAndCity({
       if (!res.ok) throw new Error("Failed to add country");
 
       const data = await res.json();
-      setCountries(prev => [data, ...prev]);
+      setCountries((prev) => [data, ...prev]);
       setNewCountry({
         name: "",
         code: "",
@@ -481,29 +588,34 @@ export function CountryAndCity({
   };
 
   const addPhoneCode = () => {
-    setNewCountry(prev => ({
+    setNewCountry((prev) => ({
       ...prev,
-      phoneCodes: [...prev.phoneCodes, ""]
+      phoneCodes: [...prev.phoneCodes, ""],
     }));
   };
 
   const removePhoneCode = (index: number) => {
-    setNewCountry(prev => ({
+    setNewCountry((prev) => ({
       ...prev,
-      phoneCodes: prev.phoneCodes.filter((_, i) => i !== index)
+      phoneCodes: prev.phoneCodes.filter((_, i) => i !== index),
     }));
   };
 
   const updatePhoneCode = (index: number, value: string) => {
-    setNewCountry(prev => ({
+    setNewCountry((prev) => ({
       ...prev,
-      phoneCodes: prev.phoneCodes.map((code, i) => i === index ? value : code)
+      phoneCodes: prev.phoneCodes.map((code, i) =>
+        i === index ? value : code
+      ),
     }));
   };
 
   const handleAddCity = async () => {
     try {
-      const validationResult = citySchema.safeParse({ ...newCity, countryId: countryValue });
+      const validationResult = citySchema.safeParse({
+        ...newCity,
+        countryId: countryValue,
+      });
       if (!validationResult.success) {
         const errors: Partial<Record<keyof AddCityFormData, string>> = {};
         validationResult.error.errors.forEach((err) => {
@@ -519,15 +631,19 @@ export function CountryAndCity({
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ ...newCity, countryId: countryValue, population: Number(newCity.population) }),
+        body: JSON.stringify({
+          ...newCity,
+          countryId: countryValue,
+          population: Number(newCity.population),
+        }),
       });
       if (!res.ok) throw new Error("Failed to add city");
       const data = await res.json();
-      setCities(prev => [data, ...prev]);
+      setCities((prev) => [data, ...prev]);
       setNewCity({
         name: "",
         asciiName: "",
-        population: '',
+        population: "",
         timezone: "",
         xCoordinate: "",
         yCoordinate: "",
@@ -543,7 +659,7 @@ export function CountryAndCity({
   };
 
   const handleCountrySelect = (currentValue: string) => {
-    const country = countries.find(c => c.id === currentValue);
+    const country = countries.find((c) => c.id === currentValue);
     setCountryValue(currentValue);
     setSelectedCountry(country || null);
     setCityValue("");
@@ -554,7 +670,7 @@ export function CountryAndCity({
   };
 
   const handleCitySelect = (currentValue: string) => {
-    const city = cities.find(c => c.id === currentValue);
+    const city = cities.find((c) => c.id === currentValue);
     setCityValue(currentValue);
     setSelectedCity(city || null);
     setCityOpen(false);
@@ -562,18 +678,27 @@ export function CountryAndCity({
   };
 
   return (
-    <div className="space-y-4 w-full">
+    <div className={className} style={style}>
       <div className="flex gap-2 w-full">
         <Popover open={countryOpen} onOpenChange={setCountryOpen}>
           <PopoverTrigger asChild>
-            <Button variant="outline" role="combobox" aria-expanded={countryOpen} className="w-full justify-between">
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={countryOpen}
+              className="w-full justify-between"
+            >
               {selectedCountryLabel}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-full p-0">
             <Command shouldFilter={false}>
-              <CommandInput placeholder="Search country..." value={countrySearchQuery} onValueChange={setCountrySearchQuery} />
+              <CommandInput
+                placeholder="Search country..."
+                value={countrySearchQuery}
+                onValueChange={setCountrySearchQuery}
+              />
               <CommandList>
                 <CommandEmpty>No countries found.</CommandEmpty>
                 <CommandGroup>
@@ -584,14 +709,28 @@ export function CountryAndCity({
                       onSelect={handleCountrySelect}
                     >
                       <div className="flex items-center gap-2">
-                        <img src={country.flag} alt={country.name} className="w-4 h-3 object-cover" />
+                        <img
+                          src={country.flag}
+                          alt={country.name}
+                          className="w-4 h-3 object-cover"
+                        />
                         {country.name}
                       </div>
-                      <Check className={cn("ml-auto h-4 w-4", countryValue === country.id ? "opacity-100" : "opacity-0")} />
+                      <Check
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          countryValue === country.id
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
                     </CommandItem>
                   ))}
                   {hasMoreCountries && (
-                    <div ref={countryObserverRef} className="py-2 text-center text-sm text-muted-foreground">
+                    <div
+                      ref={countryObserverRef}
+                      className="py-2 text-center text-sm text-muted-foreground"
+                    >
                       {isCountryLoading && "Loading more..."}
                     </div>
                   )}
@@ -605,10 +744,10 @@ export function CountryAndCity({
       <div className="flex gap-2 w-full">
         <Popover open={cityOpen} onOpenChange={setCityOpen}>
           <PopoverTrigger asChild>
-            <Button 
-              variant="outline" 
-              role="combobox" 
-              aria-expanded={cityOpen} 
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={cityOpen}
               className="w-full justify-between"
               disabled={!countryValue}
               aria-disabled={!countryValue}
@@ -620,7 +759,11 @@ export function CountryAndCity({
           </PopoverTrigger>
           <PopoverContent className="w-full p-0">
             <Command shouldFilter={false}>
-              <CommandInput placeholder="Search city..." value={citySearchQuery} onValueChange={setCitySearchQuery} />
+              <CommandInput
+                placeholder="Search city..."
+                value={citySearchQuery}
+                onValueChange={setCitySearchQuery}
+              />
               <CommandList>
                 <CommandEmpty>No cities found.</CommandEmpty>
                 <CommandGroup>
@@ -631,11 +774,19 @@ export function CountryAndCity({
                       onSelect={handleCitySelect}
                     >
                       {city.name}
-                      <Check className={cn("ml-auto h-4 w-4", cityValue === city.id ? "opacity-100" : "opacity-0")} />
+                      <Check
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          cityValue === city.id ? "opacity-100" : "opacity-0"
+                        )}
+                      />
                     </CommandItem>
                   ))}
                   {hasMoreCities && (
-                    <div ref={cityObserverRef} className="py-2 text-center text-sm text-muted-foreground">
+                    <div
+                      ref={cityObserverRef}
+                      className="py-2 text-center text-sm text-muted-foreground"
+                    >
                       {isCityLoading && "Loading more..."}
                     </div>
                   )}

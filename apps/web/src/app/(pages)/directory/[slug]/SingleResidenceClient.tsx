@@ -171,7 +171,7 @@ export default function SingleResidenceClient() {
     useEffect(() => {
         const fetchResidence = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/public/directory/slug/${residenceSlug}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}/public/residences/slug/${residenceSlug}`);
                 const data = await response.json();
                 setResidence(data.data);
 

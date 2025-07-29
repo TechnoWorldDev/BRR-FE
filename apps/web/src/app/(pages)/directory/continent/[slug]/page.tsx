@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return generatePageMetadata({
     type: 'page',
     data: {
-      title: `Branded Residences in ${continentName} – Directory & Rankings`,
+      title: `Rankings of the Best Branded Residences in ${continentName}`,
       description: `Explore the best branded residences in ${continentName}. View top listings, rankings, and reviews for luxury properties across the continent.`,
       slug: `residences/continent/${params.slug}`,
       keywords: ['continent', 'branded residences', continentName]

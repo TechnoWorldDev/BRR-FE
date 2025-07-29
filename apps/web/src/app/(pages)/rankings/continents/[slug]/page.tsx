@@ -10,8 +10,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const category = data.data;
 
   const title = category?.name
-    ? `Best Branded Residences: ${category.title}`
-    : 'Best Branded Residences Rankings';
+    ? `Rankings of the Best Branded Residences in: ${category.title} by BBR`
+    : 'Rankings of the Best Branded Residences in Rankings';
 
   const typeName = category?.rankingCategoryType?.name || '';
   const description = category?.title

@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const apiVersion = process.env.NEXT_PUBLIC_API_VERSION || "v1";
-  const res = await fetch(`${baseUrl}/api/${apiVersion}/public/directory/slug/${params.slug}`, { cache: "no-store" });
+  const res = await fetch(`${baseUrl}/api/${apiVersion}/public/residences/slug/${params.slug}`, { cache: "no-store" });
   const data = await res.json();
   const residence = data.data;
 
