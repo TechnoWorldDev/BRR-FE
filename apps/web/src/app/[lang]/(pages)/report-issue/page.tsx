@@ -25,8 +25,9 @@ export default function ReportIssuePage() {
         </div>
         <div className="w-full lg:w-[60%] mx-auto flex flex-col gap-4">
           <ReportIssueForm />
-        </div>
+        </div> 
       </div>
     </div>
   );
 }
+ 

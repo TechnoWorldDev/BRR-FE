@@ -1,4 +1,58 @@
 {
   "welcome": "Bienvenue",
-  "logout": "Se déconnecter"
+  "logout": "Se déconnecter",
+  "hero": {
+    "title": "Votre Guide de Confiance vers les Meilleures Résidences de Marque du Monde",
+    "subtitle": "De Four Seasons à Armani, explorez une collection sélectionnée de maisons haut de gamme offrant un service de classe mondiale, des équipements privés et une valeur d'investissement."
+  },
+  "stats": {
+    "propertiesRanked": "Propriétés Classées",
+    "rankingCategories": "Catégories de Classement",
+    "luxuryBrands": "Marques de luxe",
+    "starRatings": "Évaluations Clients Étoiles"
+  },
+  "rankingCriteria": {
+    "title": "CRITÈRES DE CLASSEMENT IMPECCABLES",
+    "heading": "Trouvez votre nouvelle maison ou investissement parmi les Meilleurs du Monde",
+    "description": "Best Branded Residences vous aide à choisir un partenaire de résidence privée ou une propriété qui vous convient en vous donnant des informations d'experts, des offres et des évaluations"
+  },
+  "sections": {
+    "newSolution": {
+      "title": "NOUVELLE SOLUTION",
+      "heading": "La Façon la Plus Intelligente d'Acheter, Investir et Découvrir les Résidences de Marque",
+      "description": "Des penthouses iconiques aux investissements à haut ROI, explorez des propriétés classées par confiance, qualité et valeur à long terme."
+    },
+    "matchmaking": {
+      "title": "OUTIL DE CORRESPONDANCE",
+      "heading": "Outil de Correspondance IA – Trouvez Votre Correspondance Parfaite",
+      "description": "Répondez à quelques questions rapides et laissez notre IA vous faire correspondre avec des résidences qui correspondent à votre style de vie et à vos objectifs d'investissement."
+    },
+    "exclusiveOffers": {
+      "title": "OFFRES EXCLUSIVES",
+      "heading": "Des Offres Exclusives que Vous ne Trouverez Nulle Part Ailleurs",
+      "description": "Nous avons collaboré avec vos développeurs préférés pour vous obtenir des offres exclusives sur leur inventaire disponible uniquement pour nos acheteurs.",
+      "button": "Obtenir des offres exclusives"
+    },
+    "latestNews": {
+      "title": "DERNIÈRES NOUVELLES",
+      "heading": "Restez en Avance avec les Informations sur l'Immobilier de Luxe",
+      "button": "Lire tous les insights"
+    },
+    "brands": {
+      "title": "MARQUES ET DÉVELOPPEURS",
+      "heading": "Présentation des résidences des marques et développeurs les plus exclusifs"
+    },
+    "getInTouch": {
+      "title": "NOUS CONTACTER",
+      "heading": "Connectez-vous avec Nos Experts",
+      "description": "Vous avez des questions ou besoin d'une assistance personnalisée ? Nos consultants dédiés fournissent des conseils sur mesure, vous assurant de faire les bons choix d'investissement avec confiance.",
+      "description2": "Que vous cherchiez une maison de luxe, un investissement rentable ou une expérience de style de vie exclusive, nos consultants sont là pour vous aider.",
+      "button": "Planifier une consultation"
+    },
+    "forDevelopers": {
+      "title": "POUR LES DÉVELOPPEURS",
+      "heading": "Listez Votre Résidence et Obtenez un Classement Parmi les Meilleurs",
+      "description": "Votre résidence de luxe est-elle l'une des plus fines au monde ? Élevez son prestige en sécurisant une place sur Best Branded Residences. Nos classements et avis dirigés par des experts présentent des résidences de premier ordre aux acheteurs, investisseurs et connaisseurs de luxe avertis."
+    }
+  }
 } 

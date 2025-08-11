@@ -146,7 +146,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         deleteAllAuthCookies();
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      // Only log errors that are not 401 (unauthorized) which is expected for non-logged in users
+      if (error instanceof Error && !error.message.includes('401')) {
+        console.error('Error fetching user data:', error);
+      }
       setUser(null);
       sessionStorage.removeItem('user');
       deleteAllAuthCookies();

@@ -31,8 +31,8 @@ export function MegaMenuContent({
     switch (activeMenu) {
       case "allBrands":
         return "View all Brands"
-      case "bestResidences":
-        return "View all Best Residences"
+      case "rankings":
+        return "View all Rankings"
       case "allResidences":
       default:
         return "View all Residences"

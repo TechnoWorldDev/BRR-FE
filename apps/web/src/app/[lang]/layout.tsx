@@ -1,19 +1,14 @@
-import 'server-only'
-
-export default function RootLayout({
+export default function LangLayout({
   children,
-  params,
 }: {
-  children: React.ReactNode,
-  params: { lang: string }
+  children: React.ReactNode;
 }) {
-  return (
-    <html lang={params.lang}>
-      <body>{children}</body>
-    </html>
-  )
+  return children;
 }
 
 export async function generateStaticParams() {
-  return [{ lang: 'en' }]
-} 
+  return [
+    { lang: "en" },
+    { lang: "fr" }
+  ];
+}

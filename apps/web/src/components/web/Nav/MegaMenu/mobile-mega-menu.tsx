@@ -91,8 +91,8 @@ export function MobileMegaMenu({
     switch (menuName) {
       case "allBrands":
         return "View all Brands"
-      case "bestResidences":
-        return "View all Best Residences"
+      case "rankings":
+        return "View all Rankings"
       case "allResidences":
       default:
         return "View all Residences"
@@ -167,13 +167,13 @@ export function MobileMegaMenu({
             overflow-y: auto;
           }
         `}</style>
-
+ 
         <div className="h-full flex flex-col">
           <div className="p-6 flex justify-between items-center">
             <Image src="/logo-horizontal.svg" alt="Logo" width={100} height={40} className="h-10 w-auto" />
             <button
               onClick={onClose}
-              className="text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              className="t  ext-white p-2 hover:bg-white/10 rounded-full transition-colors"
               aria-label="Close menu"
             >
               <X className="w-6 h-6" />

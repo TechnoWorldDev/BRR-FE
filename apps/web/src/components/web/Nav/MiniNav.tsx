@@ -8,21 +8,18 @@ import {
   Phone,
   User,
   LogOut,
-  BellRing,
   Settings,
-  HelpCircle,
   ChevronDown,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { usePathname } from "next/navigation";
 import AuthAwareLink from "@/components/common/AuthAwareLink";
+import LanguageDropdown from "./LanguageDropdown";
 
 export default function MiniNav() {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -107,6 +104,7 @@ export default function MiniNav() {
         >
           Marketing solutions
         </Link>
+        <LanguageDropdown />
         <div className="flex flex-col sm:flex-row gap-2 relative">
           {user ? (
             <div className="relative">

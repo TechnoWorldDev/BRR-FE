@@ -22,10 +22,16 @@ const clientCommonInfoFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
   phoneNumber: z.string().min(1, "Phone number is required"),
   email: z.string().email("Please enter a valid email address"),
-  pageOrigin: z.string(), // Automatski se popunjava
+  //pageOrigin: z.string(), // Automatski se popunjava
   companyName: z.string().min(1, "Company name is required"),
-  brandedResidencesName: z.string().min(1, "Name of branded residence is required"),
-  companyWebsite: z.string().url("Please enter a valid website URL").optional().or(z.literal("")),
+  brandedResidenceName: z
+    .string()
+    .min(1, "Name of branded residence is required"),
+  companyWebsite: z
+    .string()
+    .url("Please enter a valid website URL")
+    .optional()
+    .or(z.literal("")),
 });
 
 type ClientCommonInfoFormValues = z.infer<typeof clientCommonInfoFormSchema>;
@@ -60,33 +66,47 @@ const getErrorMessage = (status: number, defaultMessage: string): string => {
 const parseErrorResponse = async (response: Response): Promise<string> => {
   // Za 404 i 500+ greške, uvek koristi našu custom poruku
   if (response.status === 404 || response.status >= 500) {
-    return getErrorMessage(response.status, "We're unable to process your form at the moment. Please try again later.");
+    return getErrorMessage(
+      response.status,
+      "We're unable to process your form at the moment. Please try again later."
+    );
   }
-  
+
   try {
-    const contentType = response.headers.get('content-type');
-    
-    if (contentType && contentType.includes('application/json')) {
+    const contentType = response.headers.get("content-type");
+
+    if (contentType && contentType.includes("application/json")) {
       const errorData = await response.json();
-      
+
       // Pokušaj da pronađe poruku u različitim formatima - samo za client errors (4xx)
       if (response.status >= 400 && response.status < 500) {
         if (errorData.message) {
           return errorData.message;
         } else if (errorData.error) {
-          return typeof errorData.error === 'string' ? errorData.error : errorData.error.message;
-        } else if (errorData.errors && Array.isArray(errorData.errors) && errorData.errors.length > 0) {
+          return typeof errorData.error === "string"
+            ? errorData.error
+            : errorData.error.message;
+        } else if (
+          errorData.errors &&
+          Array.isArray(errorData.errors) &&
+          errorData.errors.length > 0
+        ) {
           // Za validation errors
-          return errorData.errors.map((err: any) => err.message || err).join(', ');
+          return errorData.errors
+            .map((err: any) => err.message || err)
+            .join(", ");
         }
       }
     }
   } catch (parseError) {
     console.error("Error parsing server response:", parseError);
   }
-  
+
   // Fallback na status-based poruku
-  return getErrorMessage(response.status, "We're unable to process your form at the moment. Please try again later.");
+  return getErrorMessage(
+    response.status,
+    "We're unable to process your form at the moment. Please try again later."
+  );
 };
 
 export default function ClientCommonInfoForm() {
@@ -99,37 +119,40 @@ export default function ClientCommonInfoForm() {
       name: "",
       phoneNumber: "",
       email: "",
-      pageOrigin: "",
+      // pageOrigin: "",
       companyName: "",
-      brandedResidencesName: "",
+      brandedResidenceName: "",
       companyWebsite: "",
     },
   });
 
   // Automatski popuni pageOrigin kada se komponenta mount-uje
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const currentUrl = window.location.href;
-      form.setValue('pageOrigin', currentUrl);
-      console.log("📍 Current page URL:", currentUrl);
-    }
-  }, [form, pathname]);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const currentUrl = window.location.href;
+  //     form.setValue("pageOrigin", currentUrl);
+  //     console.log("📍 Current page URL:", currentUrl);
+  //   }
+  // }, [form, pathname]);
 
   const onSubmit = async (data: ClientCommonInfoFormValues) => {
     setIsLoading(true);
 
     try {
       console.log("📤 Sending form data:", data);
-      
-      const response = await fetch(`${API_BASE_URL}/api/${API_VERSION}/public/b2b-form-submissions`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(data)
-      });
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/${API_VERSION}/marketing-solutions/create-marketing`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       console.log("📋 Response status:", response.status);
 
@@ -138,9 +161,9 @@ export default function ClientCommonInfoForm() {
         console.error("❌ Form submission failed:", {
           status: response.status,
           statusText: response.statusText,
-          message: errorMessage
+          message: errorMessage,
         });
-        
+
         throw new Error(errorMessage);
       }
 
@@ -148,44 +171,47 @@ export default function ClientCommonInfoForm() {
       console.log("✅ Form submitted successfully:", responseData);
 
       // Uspešna poruka
-      toast.success("Thank you! Your contact request has been sent successfully. We'll get back to you soon.", {
-        duration: 5000,
-      });
-      
+      toast.success(
+        "Thank you! Your contact request has been sent successfully. We'll get back to you soon.",
+        {
+          duration: 5000,
+        }
+      );
+
       // Reset forme i pageOrigin - SAMO pri uspešnom slanju
       form.reset({
         name: "",
         phoneNumber: "",
         email: "",
-        pageOrigin: typeof window !== 'undefined' ? window.location.href : "",
+        // pageOrigin: typeof window !== "undefined" ? window.location.href : "",
         companyName: "",
-        brandedResidencesName: "",
+        brandedResidenceName: "",
         companyWebsite: "",
       });
-      
     } catch (error) {
       console.error("💥 Error sending form:", error);
-      
-      let errorMessage = "We're unable to process your form at the moment. Please try again later.";
-      
+
+      let errorMessage =
+        "We're unable to process your form at the moment. Please try again later.";
+
       if (error instanceof Error) {
         errorMessage = error.message;
-      } else if (typeof error === 'string') {
+      } else if (typeof error === "string") {
         errorMessage = error;
       }
-      
+
       // Network error handling
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        errorMessage = "We're unable to process your form at the moment. Please try again later.";
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        errorMessage =
+          "We're unable to process your form at the moment. Please try again later.";
       }
-      
+
       // Prikaz error toast-a - podaci ostaju u formi
       toast.error(errorMessage, {
         duration: 6000,
       });
-      
+
       // NAMERNO NEMA form.reset() - podaci ostaju u formi kada je greška
-      
     } finally {
       setIsLoading(false);
     }
@@ -260,7 +286,7 @@ export default function ClientCommonInfoForm() {
               </FormItem>
             )}
           />
-          
+
           <div className="flex flex-col lg:flex-row gap-4">
             <FormField
               control={form.control}
@@ -280,11 +306,12 @@ export default function ClientCommonInfoForm() {
 
             <FormField
               control={form.control}
-              name="brandedResidencesName"
+              name="brandedResidenceName"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>
-                    Name of Branded Residence <span className="text-primary">*</span>
+                    Name of Branded Residence{" "}
+                    <span className="text-primary">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -315,7 +342,7 @@ export default function ClientCommonInfoForm() {
               </FormItem>
             )}
           />
-          
+
           <Button
             type="submit"
             disabled={isLoading}

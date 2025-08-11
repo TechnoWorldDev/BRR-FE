@@ -65,14 +65,14 @@ const CACHE_KEYS = {
 
 // Osnovni podaci navigacije bez dinamičkih podataka
 export const navigationData: NavigationData = {
+  // rankings: {
+  //   title: "Rankings",
+  //   href: "/rankings",
+  //   tabs: [],
+  //   content: {},
+  // },
   rankings: {
     title: "Rankings",
-    href: "/rankings",
-    tabs: [],
-    content: {},
-  },
-  bestResidences: {
-    title: "Best Residences",
     href: "/rankings",
     tabs: [], // Biće popunjeno dinamički
     content: {}, // Biće popunjeno dinamički
@@ -146,7 +146,7 @@ export const navigationData: NavigationData = {
         { label: "Cheval", href: "/brands/cheval" },
         { label: "Club Quarters", href: "/brands/club-quarters" },
         { label: "Como", href: "/brands/como" },
-        { label: "Conrad", href: "/brands/conrad" },
+        { label: "Conrad", href: "/brands/conrad" },  
         { label: "Montage", href: "/brands/montage" },
         { label: "DAMAC", href: "/brands/damac" },
         {
@@ -558,9 +558,9 @@ export async function getNavigationDataWithCities(): Promise<NavigationData> {
     data.allResidences.content["Geographical Area"] = continents; // Now uses continents from API
 
     // Populate Best Residences section
-    if (data.bestResidences) {
-      data.bestResidences.tabs = Object.keys(rankingCategories).sort();
-      data.bestResidences.content = rankingCategories;
+    if (data.rankings) {
+      data.rankings.tabs = Object.keys(rankingCategories).sort();
+      data.rankings.content = rankingCategories;
     }
 
     return data;

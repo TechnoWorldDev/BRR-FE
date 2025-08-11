@@ -1,4 +1,58 @@
 {
   "welcome": "Welcome",
-  "logout": "Logout"
+  "logout": "Logout",
+  "hero": {
+    "title": "Your Trusted Guide to the World's Best Branded Residences",
+    "subtitle": "From Four Seasons to Armani, explore a curated collection of high-end homes offering world-class service, private amenities, and investment value."
+  },
+  "stats": {
+    "propertiesRanked": "Properties Ranked",
+    "rankingCategories": "Ranking Categories",
+    "luxuryBrands": "Luxury brands",
+    "starRatings": "Star Customer Ratings"
+  },
+  "rankingCriteria": {
+    "title": "IMPECCABLE RANKING CRITERIA",
+    "heading": "Find your new home or investment from the World's Best",
+    "description": "Best Branded Residences help you choose a private residence partner or property that is right for you by giving expert insights, offers & ratings"
+  },
+  "sections": {
+    "newSolution": {
+      "title": "NEW SOLUTION",
+      "heading": "The Smartest Way to Buy, Invest & Discover Branded Residences",
+      "description": "From iconic penthouses to high-ROI investments, explore properties ranked by trust, quality, and long-term value."
+    },
+    "matchmaking": {
+      "title": "MATCHMAKING TOOL",
+      "heading": "AI Matchmaking Tool – Find Your Perfect Fit",
+      "description": "Answer a few quick questions, and let our AI match you with residences that fit your lifestyle and investment goals."
+    },
+    "exclusiveOffers": {
+      "title": "EXCLUSIVE OFFERS",
+      "heading": "Exclusive Deals You Won't Find Anywhere Else",
+      "description": "We've partnered with your favourite developers to get you exclusive offers on their inventory available only to our buyers.",
+      "button": "Get exclusive deals"
+    },
+    "latestNews": {
+      "title": "LATEST NEWS",
+      "heading": "Stay Ahead with Luxury Real Estate Insights",
+      "button": "Read all insights"
+    },
+    "brands": {
+      "title": "BRANDS AND DEVELOPERS",
+      "heading": "Showcasing residences from most exclusive brands & developers"
+    },
+    "getInTouch": {
+      "title": "GET IN TOUCH",
+      "heading": "Connect with Our Experts",
+      "description": "Have questions or need personalized assistance? Our dedicated consultants provide tailored guidance, ensuring you make the right investment choices with confidence.",
+      "description2": "Whether you are looking for a luxury home, a profitable investment, or an exclusive lifestyle experience, our consultants are here to help.",
+      "button": "Schedule a consultation"
+    },
+    "forDevelopers": {
+      "title": "FOR DEVELOPERS",
+      "heading": "List Your Residence & Get Ranked Among the Best",
+      "description": "Is your luxury residence one of the finest in the world? Elevate its prestige by securing a spot on Best Branded Residences. Our expert-driven rankings and reviews showcase top-tier residences to discerning buyers, investors, and luxury connoisseurs."
+    }
+  }
 }

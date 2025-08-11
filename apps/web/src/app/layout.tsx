@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Toaster } from "sonner";
 import "./global.css";
 import "@/styles/global.scss";
 import Footer from "@/components/web/Footer/Footer";
 import MiniNav from "@/components/web/Nav/MiniNav";
 import PrimaryNav from "@/components/web/Nav/PrimaryNav";
-import ClientLayout from "@/components/web/ClientLayout"; 
+import ClientLayout from "@/components/web/ClientLayout";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,62 +23,62 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s',
-    default: 'Best Branded Residences - Luxury Branded Residences'
+    template: "%s",
+    default: "Best Branded Residences - Luxury Branded Residences",
   },
-  description: 'Discover the world\'s finest luxury branded residences',
-  keywords: ['luxury residences', 'branded residences', 'real estate'],
-  authors: [{ name: 'BBR Team' }],
-  creator: 'Best Branded Residences',
-  publisher: 'Best Branded Residences',
+  description: "Discover the world's finest luxury branded residences",
+  keywords: ["luxury residences", "branded residences", "real estate"],
+  authors: [{ name: "BBR Team" }],
+  creator: "Best Branded Residences",
+  publisher: "Best Branded Residences",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.bestbrandedresidences.com'),
+  metadataBase: new URL("https://www.bestbrandedresidences.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'en-US': '/en-US',
-      'de-DE': '/de-DE',
+      "en-US": "/en-US",
+      "de-DE": "/de-DE",
     },
   },
   openGraph: {
-    title: 'Best Branded Residences',
-    description: 'Luxury branded residences worldwide',
-    url: 'https://www.bestbrandedresidences.com',
-    siteName: 'Best Branded Residences',
+    title: "Best Branded Residences",
+    description: "Luxury branded residences worldwide",
+    url: "https://www.bestbrandedresidences.com",
+    siteName: "Best Branded Residences",
     images: [
       {
-        url: 'https://www.bestbrandedresidences.com/bbr-cover.png',
+        url: "https://www.bestbrandedresidences.com/bbr-cover.png",
         width: 1200,
         height: 630,
-        alt: 'Best Branded Residences Cover',
+        alt: "Best Branded Residences Cover",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Best Branded Residences',
-    description: 'Luxury branded residences worldwide',
-    creator: '@bbr_residences',
-    images: ['https://www.bestbrandedresidences.com/bbr-cover.png'],
+    card: "summary_large_image",
+    title: "Best Branded Residences",
+    description: "Luxury branded residences worldwide",
+    creator: "@bbr_residences",
+    images: ["https://www.bestbrandedresidences.com/bbr-cover.png"],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: {
-    index: true,
+      index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-}
+};
 
 export default function RootLayout({
   children,
@@ -84,19 +86,46 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <ClientLayout> 
-            <MiniNav />
-            <PrimaryNav />
-            {children}
-            <Toaster position="top-center" visibleToasts={9} richColors closeButton theme="dark" />
-            <Footer />
-          </ClientLayout> 
+          <LanguageProvider>
+            <ClientLayout>
+              <MiniNav />
+              <PrimaryNav />
+              {children}
+              <Toaster
+                position="top-center"
+                visibleToasts={9}
+                richColors
+                closeButton
+                theme="dark"
+              />
+              <Footer />
+            </ClientLayout>
+          </LanguageProvider>
         </ThemeProvider>
+
+        {/* Tawk.to Script */}
+        <Script
+          id="tawk-to-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+              (function(){
+              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+              s1.async=true;
+              s1.src='https://embed.tawk.to/68908ffa3128051922f5c6ec/1j1qb4qt0';
+              s1.charset='UTF-8';
+              s1.setAttribute('crossorigin','*');
+              s0.parentNode.insertBefore(s1,s0);
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   );
